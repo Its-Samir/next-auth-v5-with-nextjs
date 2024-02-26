@@ -37,6 +37,7 @@ export async function register(values: z.infer<typeof RegisterFormSchema>): Prom
             },
         });
 
+        /* optional: if not want email verification we can remove this and directly redirect the user to the login page */
         const verificationToken = await generateVerificationToken(email);
 
         await sendVerificationEmail(verificationToken.email, verificationToken.token);
@@ -44,6 +45,6 @@ export async function register(values: z.infer<typeof RegisterFormSchema>): Prom
         return { success: "Verification email sent" }
 
     } catch (error: unknown) {
-        return { error: "Something went wrong" }
+        return { error: "Failed to save user" }
     }
 }

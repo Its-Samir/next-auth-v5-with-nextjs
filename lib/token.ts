@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import type { VerificationToken } from "@prisma/client";
 
-export async function generateVerificationToken(email: string) {
+export async function generateVerificationToken(email: string): Promise<VerificationToken> {
     const token = crypto.randomUUID();
     const expires = new Date(new Date().getTime() + 3600 * 1000);
 

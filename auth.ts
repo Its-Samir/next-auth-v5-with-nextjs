@@ -10,6 +10,10 @@ const authOptions = NextAuth({
         signIn: "/login",
     },
     events: {
+        /* set the emailVerified field for oauth users directly from here,
+            beucase we know that the providers (google, github etc) already verified the user's email,
+            assuming that the oauth emails are verified
+        */
         async linkAccount({ user }) {
             await db.user.update({
                 where: { id: user.id },
@@ -21,6 +25,7 @@ const authOptions = NextAuth({
     },
     callbacks: {
         async session({ session, token }) {
+            /* this is the token returned from the jwt method below */
             if (token.sub && session.user) {
                 session.user.id = token.sub;
                 session.user.name = token.name;
@@ -37,6 +42,7 @@ const authOptions = NextAuth({
 
             if (!user) return token;
 
+            /* for oauth users */
             if (user.email && !user.username) {
                 await db.user.update({
                     where: { id: user.id },

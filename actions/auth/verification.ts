@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { getVerificationToken } from "@/lib/queries/verification-token";
 import { getUserByEmail } from "@/lib/queries/user";
 
+/* only need if using email verification */
 export async function verifyEmail(token: string): Promise<ActionsReturnType> {
     try {
         const existingToken = await getVerificationToken(token);

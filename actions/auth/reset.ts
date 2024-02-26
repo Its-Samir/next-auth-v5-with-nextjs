@@ -7,6 +7,7 @@ import { ResetFormSchema } from "@/lib/schemas/reset-form-schema";
 import { generateVerificationToken } from "@/lib/token";
 import { getUserByEmail } from "@/lib/queries/user";
 
+/* only need if using email verification */
 export async function sendEmail(values: z.infer<typeof ResetFormSchema>): Promise<ActionsReturnType> {
     try {
         const validationResult = ResetFormSchema.safeParse(values);

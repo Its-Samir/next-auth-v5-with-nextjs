@@ -8,6 +8,8 @@ import { z } from "zod";
 import { getUserByEmail } from "@/lib/queries/user";
 import { getVerificationToken } from "@/lib/queries/verification-token";
 
+/* here for reseting password we are using email verification, if not want then remove 
+the statements for checking the correct token */
 export async function resetPassword(
     values: z.infer<typeof PasswordResetFormSchema>,
     token: string

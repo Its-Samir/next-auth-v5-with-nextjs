@@ -28,6 +28,7 @@ export async function login(values: z.infer<typeof LoginFormSchema>) {
             return { error: "User not found" };
         }
 
+        /* check if the user's email is registered with any OAuth provider */
         const userAccount = await getAccountByUserId(existingUser.id);
 
         if (userAccount && userAccount.type === "oauth") {
@@ -40,6 +41,7 @@ export async function login(values: z.infer<typeof LoginFormSchema>) {
             return { error: "Invalid credentials" };
         }
 
+        /* this is the extra check for email verification, if not want email verification we can remove this check, and directly allow the user to sign in */
         if (!existingUser.emailVerified) {
             const verificationToken = await generateVerificationToken(existingUser.email!);
 
@@ -49,6 +51,7 @@ export async function login(values: z.infer<typeof LoginFormSchema>) {
         }
 
         try {
+            /* signIn method will directly redirect user from here (if redirect option is not set), but we are not doing it, instead we are saving the returned redirect url and using the redirect method provided by nextjs */
             redirectUrl = await signIn("credentials", {
                 email,
                 password,
@@ -64,5 +67,6 @@ export async function login(values: z.infer<typeof LoginFormSchema>) {
         return { error: "Something went wrong" }
     }
 
+    /* we cannot use redirect method directly inside try-catch block, if we do then nextjs will take it as a redirect error (NEXT_REDIRECT) */
     redirect(redirectUrl);
 } 

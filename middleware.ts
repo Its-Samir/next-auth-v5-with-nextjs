@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import { authConfig } from "@/auth.config";
 import { NextResponse } from "next/server";
 
+/* config for next-auth v5 */
 const { auth: middleware } = NextAuth(authConfig);
 
 export default middleware((req) => {
