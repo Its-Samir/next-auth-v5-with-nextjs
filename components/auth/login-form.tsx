@@ -107,7 +107,7 @@ export default function LoginForm() {
                     />
 
                     <span className="text-slate-700">
-                        <Link href={"/reset"}>forget password?</Link>
+                        <Link href={"/reset"}>forgot password?</Link>
                     </span>
                     <FormStatus message={status.message || oAuthError} success={status.success} />
                     <Button

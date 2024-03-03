@@ -13,11 +13,14 @@ export default function VerificationForm({ token }: { token: string }) {
     function verify() {
         startTransition(() => {
             verifyEmail(token).then(data => {
-                if (data.error) {
+                if (data?.error) {
                     setStatus({ message: data.error, success: false });
 
-                } else if (data.success) {
-                    setStatus({ message: data.success, success: true });
+                } else if (!data || !data.error) {
+                    setStatus({
+                        message: "Email verified successfully",
+                        success: true
+                    });
                 }
 
             }).catch(err => {
@@ -30,6 +33,7 @@ export default function VerificationForm({ token }: { token: string }) {
     }
 
     useEffect(() => {
+        /* this would trigger twice because of react strict mode, so even if first response is success, then the second response would be an error, because after we check the email we are simply deleting the token, so it would not be able to find that token again, but that's totally ok and only happens in development */
         verify();
     }, []);
 
@@ -40,7 +44,7 @@ export default function VerificationForm({ token }: { token: string }) {
             text="Back to login."
             social={false}
         >
-            {isPending || status.message === "" ? (
+            {status.message === "" ? (
                 <Loader2 className='animate-spin mx-auto my-5' size={50} />
             ) : null}
             <FormStatus message={status.message} success={status.success} className="justify-center" />

@@ -4,6 +4,7 @@ import ActionsReturnType from "@/types";
 import { db } from "@/lib/db";
 import { getVerificationToken } from "@/lib/queries/verification-token";
 import { getUserByEmail } from "@/lib/queries/user";
+import { redirect } from "next/navigation";
 
 /* only need if using email verification */
 export async function verifyEmail(token: string): Promise<ActionsReturnType> {
@@ -39,9 +40,9 @@ export async function verifyEmail(token: string): Promise<ActionsReturnType> {
             where: { id: existingToken.id }
         });
 
-        return { success: "Email successfully verified" }
-
     } catch (error: unknown) {
         return { error: "Something went wrong" }
     }
+
+    redirect("/login");
 }
