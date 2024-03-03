@@ -15,3 +15,13 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## For database
+
+Setup the database url inside .env file and then use these commands
+
+```bash 
+npx prisma generate 
+
+npx prisma db push
+```
