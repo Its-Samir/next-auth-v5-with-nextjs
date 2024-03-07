@@ -12,18 +12,9 @@ export default function FormStatus({ message, success, className }: FormStatusPr
         return null;
     }
 
-    if (success) {
-        return (
-            <div className={cn("text-sm my-2 p-4 flex gap-3 items-center bg-emerald-200 text-emerald-700", className)}>
-                <CheckCircle size={18} />
-                <p>{message}</p>
-            </div>
-        )
-    }
-
     return (
-        <div className={cn("text-sm p-3 flex gap-3 items-center text-destructive bg-red-200", className)}>
-            <AlertTriangle size={18} />
+        <div className={cn(`text-sm p-3 rounded flex gap-3 items-center ${success ? "bg-emerald-200 text-emerald-700" : "text-destructive bg-red-200"}`, className)}>
+            {success ? <CheckCircle size={18} /> : <AlertTriangle size={18} />}
             <p>{message}</p>
         </div>
     )

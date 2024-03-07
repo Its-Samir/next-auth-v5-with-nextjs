@@ -16,11 +16,14 @@ export default function Socials() {
                 <Button
                     onClick={() => signIn("github", { callbackUrl: "/" })}
                     variant={"outline"}
-                    className="p-4 border flex-1"
+                    className="p-4 border flex-1 bg-slate-600 text-white"
                 >
                     Github
                 </Button>
-                <Button variant={"outline"} className="p-4 border flex-1">
+                <Button
+                    variant={"outline"}
+                    className="p-4 border flex-1 bg-red-300 text-white"
+                >
                     Google
                 </Button>
             </Card>
