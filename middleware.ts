@@ -15,6 +15,13 @@ export default middleware((req) => {
     const isProtectedRoutes = ["/", "/dashboard"].includes(nextUrl.pathname);
     const token = nextUrl.searchParams.get('token');
 
+    /* 
+        this token validation is just for ux purpose,
+        that's why we are not querying/checking for correct token,
+        the main validation/check already implemented inside all the verification pages
+        which are listed into the isVerificationRoutes array,
+        this is just an example how we can check for token extracted from cookies/url params
+     */
     if (!token && isVerificaitonRoutes) {
         return NextResponse.redirect(new URL("/login", nextUrl));
     }

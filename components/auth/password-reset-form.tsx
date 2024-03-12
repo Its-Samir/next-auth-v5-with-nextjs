@@ -30,11 +30,14 @@ export default function PasswordResetForm({ token }: { token: string }) {
 
         startTransition(() => {
             resetPassword(values, token).then(data => {
-                if (data.error) {
+                if (data && data.error) {
                     setStatus({ message: data.error, success: false });
 
-                } else if (data.success) {
-                    setStatus({ message: data.success, success: true });
+                } else if (!data || !data.error) {
+                    setStatus({
+                        message: "Password changed successfully",
+                        success: true
+                    });
                 }
 
             }).catch(err => {

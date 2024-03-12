@@ -46,7 +46,7 @@ export default function ResetForm() {
     return (
         <Wrapper
             url="/login"
-            header="VERIFY EMAIL"
+            header="GET VERIFICATION EMAIL"
             text="Go back to login."
             social={false}
         >

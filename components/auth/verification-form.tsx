@@ -13,7 +13,7 @@ export default function VerificationForm({ token }: { token: string }) {
     function verify() {
         startTransition(() => {
             verifyEmail(token).then(data => {
-                if (data?.error) {
+                if (data && data.error) {
                     setStatus({ message: data.error, success: false });
 
                 } else if (!data || !data.error) {

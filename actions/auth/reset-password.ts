@@ -7,6 +7,7 @@ import { PasswordResetFormSchema } from "@/lib/schemas/password-reset-schema";
 import { z } from "zod";
 import { getUserByEmail } from "@/lib/queries/user";
 import { getVerificationToken } from "@/lib/queries/verification-token";
+import { redirect } from "next/navigation";
 
 /* here for reseting password we are using email verification, if not want then remove 
 the statements for checking the correct token */
@@ -48,9 +49,9 @@ export async function resetPassword(
             where: { id: existingToken.id },
         });
 
-        return { success: "Password changed successfully" }
-
     } catch (error) {
         return { error: "Something went wrong" }
     }
+
+    redirect("/login");
 }
