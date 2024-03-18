@@ -42,7 +42,7 @@ export async function register(values: z.infer<typeof RegisterFormSchema>): Prom
 
         await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
-        return { success: "Verification email sent" }
+        return { success: "Verification mail sent to your email" };
 
     } catch (error: unknown) {
         return { error: "Failed to save user" }

@@ -35,8 +35,6 @@ model User {
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  posts         Post[]
-  comments      Comment[]
 }
 
 model VerificationToken {
@@ -46,38 +44,4 @@ model VerificationToken {
   expires DateTime
 
   @@unique([email, token])
-}
-
-model Post {
-  id      String  @id @default(cuid())
-  slug    String  @unique
-  title   String
-  content String
-  image   String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  comments Comment[]
-}
-
-model Comment {
-  id   String @id @default(cuid())
-  text String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId   String
-  postId   String
-  parentId String?
-
-  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  parent Comment? @relation("Comments", fields: [parentId], references: [id], onDelete: Cascade)
-
-  childrens Comment[] @relation("Comments")
 }

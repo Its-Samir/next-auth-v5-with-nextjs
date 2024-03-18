@@ -26,7 +26,7 @@ export async function sendEmail(values: z.infer<typeof ResetFormSchema>): Promis
 
         await sendResetPasswordEmail(verificationToken.email, verificationToken.token);
 
-        return { success: "Verification email sent" }
+        return { success: "Reset link sent to your email" }
 
     } catch (error) {
         return { error: "Something went wrong" }

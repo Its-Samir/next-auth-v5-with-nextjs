@@ -47,7 +47,7 @@ export async function login(values: z.infer<typeof LoginFormSchema>) {
 
             await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
-            return { success: "Verification email sent" };
+            return { success: "Verification mail sent to your email" };
         }
 
         try {
