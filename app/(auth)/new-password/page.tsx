@@ -1,6 +1,11 @@
 import PasswordResetForm from "@/components/auth/password-reset-form";
 import { getVerificationToken } from "@/lib/queries/verification-token";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Auth - Change Password",
+};
 
 interface PasswordResetPageProps {
     searchParams: {
