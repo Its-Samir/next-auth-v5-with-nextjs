@@ -2,15 +2,15 @@
 
 import ActionsReturnType from "@/types";
 import bcrypt from 'bcryptjs';
-import { RegisterFormSchema } from "@/lib/schemas/register-form-schema";
+import { registerFormSchema } from "@/lib/schemas/register-form-schema";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/token";
 
-export async function register(values: z.infer<typeof RegisterFormSchema>): Promise<ActionsReturnType> {
+export async function register(values: z.infer<typeof registerFormSchema>): Promise<ActionsReturnType> {
     try {
-        const validationResult = RegisterFormSchema.safeParse(values);
+        const validationResult = registerFormSchema.safeParse(values);
 
         if (!validationResult.success) {
             return { error: "Invalid inputs" }

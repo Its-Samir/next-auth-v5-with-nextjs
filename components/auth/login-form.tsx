@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginFormSchema } from "@/lib/schemas/login-form-schema";
+import { loginFormSchema } from "@/lib/schemas/login-form-schema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
@@ -25,15 +25,15 @@ export default function LoginForm() {
         "Another account already exists with the same email" :
         "";
 
-    const form = useForm<z.infer<typeof LoginFormSchema>>({
-        resolver: zodResolver(LoginFormSchema),
+    const form = useForm<z.infer<typeof loginFormSchema>>({
+        resolver: zodResolver(loginFormSchema),
         defaultValues: {
             email: "",
             password: "",
         }
     });
 
-    function onFormSubmit(values: z.infer<typeof LoginFormSchema>) {
+    function onFormSubmit(values: z.infer<typeof loginFormSchema>) {
         setShowPassword(false);
 
         startTransition(() => {

@@ -23,7 +23,7 @@ export default function Home() {
                 <h1 className="text-5xl text-center mt-[4rem]">
                     Hello, {" "}
                     <span className="text-slate-500">
-                        {session.user.name?.toUpperCase()}
+                        {session.user.username?.toUpperCase()}
                     </span>
                 </h1>
                 <div className="mx-auto w-max my-[2rem] border p-2 bg-emerald-200">
