@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## For database
 
-Setup the database url inside .env file and then use these commands
+Setup the database url inside .env file and then use these commands (current prisma schemas are for postgresql)
 
 ```bash 
 npx prisma generate 

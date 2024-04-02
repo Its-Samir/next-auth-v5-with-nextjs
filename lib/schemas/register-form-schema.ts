@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const RegisterFormSchema = z.object({
+export const registerFormSchema = z.object({
     username: z.string().min(1, {
         message: "Username is required"
     }),

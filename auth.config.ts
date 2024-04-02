@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import Github from '@auth/core/providers/github';
 import Credentials from '@auth/core/providers/credentials';
 import { NextAuthConfig } from "next-auth";
-import { LoginFormSchema } from "@/lib/schemas/login-form-schema";
+import { loginFormSchema } from "@/lib/schemas/login-form-schema";
 import { getUserByEmail } from "@/lib/queries/user";
 
 export const authConfig: NextAuthConfig = {
@@ -13,7 +13,7 @@ export const authConfig: NextAuthConfig = {
         }),
         Credentials({
             async authorize(credentials) {
-                const validation = LoginFormSchema.safeParse(credentials);
+                const validation = loginFormSchema.safeParse(credentials);
 
                 if (!validation.success) {
                     return null;

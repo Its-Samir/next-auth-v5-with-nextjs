@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { ResetFormSchema } from "@/lib/schemas/reset-form-schema";
+import { resetFormSchema } from "@/lib/schemas/reset-form-schema";
 import { sendEmail } from "@/actions/auth/reset";
 import { BeatLoader } from "react-spinners";
 import Wrapper from "./wrapper";
@@ -17,14 +17,14 @@ export default function ResetForm() {
     const [isPending, startTransition] = useTransition();
     const [status, setStatus] = useState({ success: false, message: '' });
 
-    const form = useForm<z.infer<typeof ResetFormSchema>>({
-        resolver: zodResolver(ResetFormSchema),
+    const form = useForm<z.infer<typeof resetFormSchema>>({
+        resolver: zodResolver(resetFormSchema),
         defaultValues: {
             email: "",
         }
     });
 
-    function onFormSubmit(values: z.infer<typeof ResetFormSchema>) {
+    function onFormSubmit(values: z.infer<typeof resetFormSchema>) {
         startTransition(() => {
             sendEmail(values).then(data => {
                 if (data.error) {

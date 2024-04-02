@@ -3,7 +3,7 @@
 import ActionsReturnType from "@/types";
 import bcrypt from 'bcryptjs';
 import { db } from "@/lib/db";
-import { PasswordResetFormSchema } from "@/lib/schemas/password-reset-schema";
+import { passwordResetFormSchema } from "@/lib/schemas/password-reset-schema";
 import { z } from "zod";
 import { getUserByEmail } from "@/lib/queries/user";
 import { getVerificationToken } from "@/lib/queries/verification-token";
@@ -12,11 +12,11 @@ import { redirect } from "next/navigation";
 /* here for reseting password we are using email verification, if not want then remove 
 the statements for checking the correct token */
 export async function resetPassword(
-    values: z.infer<typeof PasswordResetFormSchema>,
+    values: z.infer<typeof passwordResetFormSchema>,
     token: string
 ): Promise<ActionsReturnType> {
     try {
-        const validationResult = PasswordResetFormSchema.safeParse(values);
+        const validationResult = passwordResetFormSchema.safeParse(values);
 
         if (!validationResult.success) {
             return { error: "Invalid inputs" }

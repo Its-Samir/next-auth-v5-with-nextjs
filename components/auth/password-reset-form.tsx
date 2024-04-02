@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { PasswordResetFormSchema } from "@/lib/schemas/password-reset-schema";
+import { passwordResetFormSchema } from "@/lib/schemas/password-reset-schema";
 import { resetPassword } from "@/actions/auth/reset-password";
 import { BeatLoader } from "react-spinners";
 import Wrapper from "./wrapper";
@@ -18,14 +18,14 @@ export default function PasswordResetForm({ token }: { token: string }) {
     const [status, setStatus] = useState({ success: false, message: '' });
     const [showPassword, setShowPassword] = useState(false);
 
-    const form = useForm<z.infer<typeof PasswordResetFormSchema>>({
-        resolver: zodResolver(PasswordResetFormSchema),
+    const form = useForm<z.infer<typeof passwordResetFormSchema>>({
+        resolver: zodResolver(passwordResetFormSchema),
         defaultValues: {
             password: "",
         }
     });
 
-    function onFormSubmit(values: z.infer<typeof PasswordResetFormSchema>) {
+    function onFormSubmit(values: z.infer<typeof passwordResetFormSchema>) {
         setShowPassword(false);
 
         startTransition(() => {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
-export const ResetFormSchema = z.object({
+export const resetFormSchema = z.object({
     email: z.string().email({ message: "Email is required" })
 });
